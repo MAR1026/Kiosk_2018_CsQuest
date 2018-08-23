@@ -15,7 +15,7 @@ namespace RestaurantKiosk.Model
         RICE = 3,
         STEW = 4,
         FRIED = 5,
-        Snack = 6
+        SNACK = 6
     }
 
     public class Food : INotifyPropertyChanged

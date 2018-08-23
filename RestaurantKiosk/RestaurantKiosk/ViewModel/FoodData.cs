@@ -90,7 +90,7 @@ namespace RestaurantKiosk.ViewModel
                 Name = "유부우동",
                 Quantity = 0,
                 Price = 4000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/FiredTofuUdon.jpg", UriKind.Relative)),
+                Image = new BitmapImage(new Uri("Assets/Image/Noodle/FiredTofuUdon.jpg", UriKind.Relative)),
                 Notice = "유부와 진한 우동의 개운한 맛의 우동"
             });
 
@@ -100,7 +100,7 @@ namespace RestaurantKiosk.ViewModel
                 Name = "냉모밀",
                 Quantity = 0,
                 Price = 6000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/Soba.jpg", UriKind.Relative)),
+                Image = new BitmapImage(new Uri("Assets/Image/Noodle/Soba.jpg", UriKind.Relative)),
                 Notice = "메밀면에 시원한 장국육수의 담백한 냉모밀"
             });
 
@@ -110,7 +110,7 @@ namespace RestaurantKiosk.ViewModel
                 Name = "냉면",
                 Quantity = 0,
                 Price = 6000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/ColdNoodle.jpg", UriKind.Relative)),
+                Image = new BitmapImage(new Uri("Assets/Image/Noodle/ColdNoodle.jpg", UriKind.Relative)),
                 Notice = "진한 동치미육수와 쫄깃한 면발의 냉면"
             });
 
@@ -120,7 +120,7 @@ namespace RestaurantKiosk.ViewModel
                 Name = "가츠동",
                 Quantity = 0,
                 Price = 5000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/katsudon.jpg", UriKind.Relative)),
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/katsudon.jpg", UriKind.Relative)),
                 Notice = "생등심 돈까스를 이용하여 만든 부드러운 맛의 가츠돈"
             });
 
@@ -130,7 +130,7 @@ namespace RestaurantKiosk.ViewModel
                 Name = "가츠동",
                 Quantity = 0,
                 Price = 5000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/katsudon.jpg", UriKind.Relative)),
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/katsudon.jpg", UriKind.Relative)),
                 Notice = "생등심 돈까스를 이용하여 만든 부드러운 맛의 가츠돈"
             });
 
@@ -140,49 +140,191 @@ namespace RestaurantKiosk.ViewModel
                 Name = "돈가스 김치볶음밥",
                 Quantity = 0,
                 Price = 6500,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/PorkCutletKimchiFriedRice.jpg", UriKind.Relative)),
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/PorkCutletKimchiFriedRice.jpg", UriKind.Relative)),
                 Notice = "생등심 돈까스와 김치볶음밥 두가지를 맛볼 수 있는 세트"
             });
 
             foods.Add(new Food
             {
                 Category = CategoryType.RICE,
-                Name = "가츠동",
+                Name = "오므라이스",
                 Quantity = 0,
-                Price = 5000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/katsudon.jpg", UriKind.Relative)),
-                Notice = "생등심 돈까스를 이용하여 만든 부드러운 맛의 가츠돈"
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/OmeletRice.jpg", UriKind.Relative)),
+                Notice = "신선한 야채와 계란 지단이 어우러진 담백한 오므라이스"
             });
 
             foods.Add(new Food
             {
                 Category = CategoryType.RICE,
-                Name = "가츠동",
+                Name = "김치볶음밥",
                 Quantity = 0,
-                Price = 5000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/katsudon.jpg", UriKind.Relative)),
-                Notice = "생등심 돈까스를 이용하여 만든 부드러운 맛의 가츠돈"
+                Price = 4000,
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/KimchiFriedRice.jpg", UriKind.Relative)),
+                Notice = "김치의 감칠맛과 고소한 맛이 더한 김치볶음밥"
             });
 
             foods.Add(new Food
             {
                 Category = CategoryType.RICE,
-                Name = "가츠동",
+                Name = "직화낙지덮밥",
                 Quantity = 0,
-                Price = 5000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/katsudon.jpg", UriKind.Relative)),
-                Notice = "생등심 돈까스를 이용하여 만든 부드러운 맛의 가츠돈"
+                Price = 6000,
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/FriedOctopusRice.jpg", UriKind.Relative)),
+                Notice = "불맛이 가득한 낙지와 매콤한 특제소스가 일품인 덮밥"
             });
 
             foods.Add(new Food
             {
                 Category = CategoryType.RICE,
-                Name = "가츠동",
+                Name = "직화소고기덮밥",
+                Quantity = 0,
+                Price = 6000,
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/FriedBeefRice.jpg", UriKind.Relative)),
+                Notice = "불맛이 가득한 소고기와 매콤한 특제소스가 일품인 덮밥"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.RICE,
+                Name = "직화닭가슴살덮밥",
+                Quantity = 0,
+                Price = 6000,
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/ChickenBreastRice.jpg", UriKind.Relative)),
+                Notice = "불맛이 가득한 닭가슴살과 매콤한 특제소스가 일품인 덮밥"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.RICE,
+                Name = "직화제육덮밥",
+                Quantity = 0,
+                Price = 6000,
+                Image = new BitmapImage(new Uri("Assets/Image/Rice/SpicyPorkRice.jpg", UriKind.Relative)),
+                Notice = "불맛이 가득한 제육과 매콤한 특제소스가 일품인 덮밥"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.STEW,
+                Name = "순두부찌개",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Stew/SoftTofuStew.jpg", UriKind.Relative)),
+                Notice = "바지락과 야채와 순두부의 개운한 맛의 찌개"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.STEW,
+                Name = "된장찌개",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Stew/BeanPasteStew.jpg", UriKind.Relative)),
+                Notice = "신선한 야채와 바지락이 잘 어우러진 깔끔한 찌개"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.STEW,
+                Name = "김치찌개",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Stew/KimchiStew.jpg", UriKind.Relative)),
+                Notice = "신선한 야채와 돼지고기가 잘 어우러진 담백한 찌개"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.STEW,
+                Name = "부대찌개",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Stew/SausageStew.jpg", UriKind.Relative)),
+                Notice = "모듬햄과 라면사리가 어우러진 맛있는 부대찌개"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.STEW,
+                Name = "육개장",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Stew/SpicyBeefStew.jpg", UriKind.Relative)),
+                Notice = "소고기와 고사리가 잘 어우러진 얼큰한 육개장"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.STEW,
+                Name = "뚝배기불고기",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Stew/HotPotBulgogi.jpg", UriKind.Relative)),
+                Notice = "소불고기와 당면사리 신선한 야채의 담백한 뚝배기불고기"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.STEW,
+                Name = "한우사골 떡만두국",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Stew/TteokDumplingStew.jpg", UriKind.Relative)),
+                Notice = "한우 사골의 담백한 육수와 쌀떡,만두가 가득한 만두국"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.SNACK,
+                Name = "갈비만두",
+                Quantity = 0,
+                Price = 4500,
+                Image = new BitmapImage(new Uri("Assets/Image/Snack/RipDumpling.jpg", UriKind.Relative)),
+                Notice = "갈비가 가득 들어있는 갈비만두"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.SNACK,
+                Name = "왕만두",
+                Quantity = 0,
+                Price = 4500,
+                Image = new BitmapImage(new Uri("Assets/Image/Snack/BigDumpling.jpg", UriKind.Relative)),
+                Notice = "왕만두"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.SNACK,
+                Name = "치즈라볶이",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Snack/CheeseRabboki.jpg", UriKind.Relative)),
+                Notice = "떡볶이와 라면사리 위에 치즈가 가득! 매콤함과 치즈의 고소한맛을 느낄수 있는 메뉴"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.SNACK,
+                Name = "라볶이",
                 Quantity = 0,
                 Price = 5000,
-                Image = new BitmapImage(new Uri("Assets/Image/GIMBAP/katsudon.jpg", UriKind.Relative)),
-                Notice = "생등심 돈까스를 이용하여 만든 부드러운 맛의 가츠돈"
+                Image = new BitmapImage(new Uri("Assets/Image/Snack/Rabboki.jpg", UriKind.Relative)),
+                Notice = "떡볶이와 라면사리에 매콤한 특제소스가 더해진 메뉴"
             });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.FRIED,
+                Name = "치즈돈가스",
+                Quantity = 0,
+                Price = 5500,
+                Image = new BitmapImage(new Uri("Assets/Image/Snack/CheesePorkCutlet.jpg", UriKind.Relative)),
+                Notice = "모짜렐라 치즈를 가득 머금고 있는 치즈돈까스"
+            });
+
+            Adds(foods);
         }
     }
 }
