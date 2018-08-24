@@ -11,10 +11,11 @@ namespace RestaurantKiosk.ViewModel
 {
     public partial class FoodViewModel
     {
-        ObservableCollection<Food> Items { get; } = new ObservableCollection<Food>();
+        ObservableCollection<Food> Items { get; }
 
         public FoodViewModel()
         {
+            Items = new ObservableCollection<Food>();
 #if false
             LoadDefaultData();
 #else
