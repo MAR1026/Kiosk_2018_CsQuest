@@ -4,39 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantKiosk.Controls"
+             xmlns:model="clr-namespace:RestaurantKiosk.Model"
+             xmlns:converter="clr-namespace:RestaurantKiosk.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:OrderInfoToStringConverter x:Key="OrderInfoToStringConverter"/>
+
+        <DataTemplate x:Key="TableControlOrderListDataTemplate" DataType="{x:Type model:TableInfo}">
+            <Grid x:Name="gdTableList" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition Height="0.8*"/> <!--메뉴 이름 & 수량-->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="Black">
+                    <TextBlock x:Name="tbTableIdx" Margin="12, 0, 0, 0" 
+                               Foreground="White"
+                               Text="{Binding Idx}"/>
+                </Grid>
+                <Border BorderBrush="Red" BorderThickness="0, 0, 0, 1"/>
+                <Grid Grid.Row="1" Margin="10, 0, 0, 0">
+                    <TextBlock x:Name="tbMenuName" 
+                               Text="{Binding FoodList, Converter={StaticResource OrderInfoToStringConverter}}"
+                               FontSize="14" FontWeight="Bold"
+                               Foreground="Gray"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <Grid>
-        <ListView x:Name="lvTableList"
-                  SelectionMode="Single"
-                  MouseDoubleClick="lvTableList_MouseDoubleClick"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="100" Width="100" Margin="15">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.2*"/>
-                            <RowDefinition Height="0.8*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.Resources>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="FontFamily" Value="NanumSquare Bold"/>
-                            </Style>
-                        </Grid.Resources>
-
-                        <Grid Grid.Row="0" VerticalAlignment="Center">
-                            <TextBlock x:Name="tbTableIdx"
-                                       Text="{Binding Idx}"/>
-                        </Grid>
-
-                        <Grid Grid.Row="1" Margin="6, 0, 0, 0" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding }"/>
-                        </Grid>
-                    </Grid>
-                </DataTemplate>    
-            </ListView.ItemTemplate>
-            
-        </ListView>
+        <ListBox x:Name="lbTableList" ItemTemplate="{StaticResource TableControlOrderListDataTemplate}"
+                 SelectionMode="Single"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                 HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="2"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </Grid>
 </UserControl>

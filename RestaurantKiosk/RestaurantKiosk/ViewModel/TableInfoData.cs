@@ -17,42 +17,70 @@ namespace RestaurantKiosk.ViewModel
             {
                 Idx = 1,
                 TotalPrice = 0,
-                FoodList = null
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
             });
 
             tables.Add(new TableInfo
             {
                 Idx = 2,
                 TotalPrice = 0,
-                FoodList = null
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
             });
 
             tables.Add(new TableInfo
             {
                 Idx = 3,
                 TotalPrice = 0,
-                FoodList = null
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
             });
 
             tables.Add(new TableInfo
             {
                 Idx = 4,
                 TotalPrice = 0,
-                FoodList = null
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
             });
 
             tables.Add(new TableInfo
             {
                 Idx = 5,
                 TotalPrice = 0,
-                FoodList = null
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
             });
 
             tables.Add(new TableInfo
             {
                 Idx = 6,
                 TotalPrice = 0,
-                FoodList = null
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
+            });
+
+            tables.Add(new TableInfo
+            {
+                Idx = 7,
+                TotalPrice = 0,
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
+            });
+
+            tables.Add(new TableInfo
+            {
+                Idx = 8,
+                TotalPrice = 0,
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
+            });
+
+            tables.Add(new TableInfo
+            {
+                Idx = 9,
+                TotalPrice = 0,
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
+            });
+
+            tables.Add(new TableInfo
+            {
+                Idx = 10,
+                TotalPrice = 0,
+                FoodList = new FoodViewModel().LoadDummyDefaultData()
             });
 
             Adds(tables);

@@ -70,6 +70,7 @@
     <Compile Include="Controls\TableControl.xaml.cs">
       <DependentUpon>TableControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\OrderInfoToStringConverter.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\TableInfo.cs" />
     <Compile Include="ViewModel\FoodData.cs" />

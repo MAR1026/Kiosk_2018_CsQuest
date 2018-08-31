@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:RestaurantKiosk"
         xmlns:ctrl="clr-namespace:RestaurantKiosk.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        ContentRendered="Window_ContentRenderd">
+        Title="MainWindow" MinHeight="720" MinWidth="1080" 
+        ContentRendered="Window_ContentRenderd" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid x:Name="gdTableList" Background="Black">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
             <Grid Grid.Row="0" Background="White">

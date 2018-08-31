@@ -23,7 +23,10 @@ namespace RestaurantKiosk.Controls
         public TableControl()
         {
             InitializeComponent();
+            lbTableList.ItemsSource = App.tableViewModel.Items;
         }
+
+
 
         private void lvTableList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

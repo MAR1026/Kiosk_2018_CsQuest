@@ -15,5 +15,6 @@ namespace RestaurantKiosk
     public partial class App : Application
     {
         public static FoodViewModel foodViewModel = new FoodViewModel();
+        public static TableViewModel tableViewModel = new TableViewModel();
     }
 }

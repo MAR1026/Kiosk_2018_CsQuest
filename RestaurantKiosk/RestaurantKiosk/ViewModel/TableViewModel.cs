@@ -11,11 +11,21 @@ namespace RestaurantKiosk.ViewModel
 {
     public partial class TableViewModel
     {
-        ObservableCollection<TableInfo> Items { get; }
+        public ObservableCollection<TableInfo> Items { get; }
 
         public TableViewModel()
         {
             Items = new ObservableCollection<TableInfo>();
+#if false
+            LoadDefaultData();
+#else
+            LoadDummyDefaultData();
+#endif
+        }
+
+        public void LoadDefaultData()
+        {
+            //TODO: 
         }
 
         public void Adds(List<TableInfo> tables)

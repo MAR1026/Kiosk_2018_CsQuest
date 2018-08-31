@@ -11,7 +11,7 @@ namespace RestaurantKiosk.ViewModel
 {
     public partial class FoodViewModel
     {
-        ObservableCollection<Food> Items { get; }
+        public ObservableCollection<Food> Items { get; }
 
         public FoodViewModel()
         {
