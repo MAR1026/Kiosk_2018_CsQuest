@@ -26,9 +26,7 @@ namespace RestaurantKiosk.Controls
             lbTableList.ItemsSource = App.tableViewModel.Items;
         }
 
-
-
-        private void lvTableList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void lbTableList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

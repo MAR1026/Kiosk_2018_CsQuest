@@ -40,7 +40,8 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                 HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                 SelectionChanged="lbTableList_SelectionChanged">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
