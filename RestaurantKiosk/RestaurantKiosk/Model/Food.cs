@@ -80,8 +80,8 @@ namespace RestaurantKiosk.Model
             }
         }
 
-        private BitmapImage image;
-        public BitmapImage Image
+        private string image;
+        public string Image
         {
             get
             {

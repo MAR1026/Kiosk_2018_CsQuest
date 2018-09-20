@@ -9,25 +9,41 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <DataTemplate x:Key="FoodListDataTemplate" DataType="{x:Type model:Food}">
-            <Grid x:Name="gdFoodItem">
-                <Grid Height="100" Width="100" FocusVisualStyle="{x:Null}" Margin="42,5,20,5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="70"/>
-                        <!--이미지-->
-                        <ColumnDefinition Width="*"/>
-                        <!--이름 가격-->
-                    </Grid.ColumnDefinitions>
+        <Style x:Key="FoodName" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
 
-                    <Grid Grid.Column="0" Margin="12,0,0,0">
+        <Style x:Key="FoodPrice" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+        
+        <DataTemplate x:Key="FoodListDataTemplate" DataType="{x:Type model:Food}">
+            <Grid x:Name="gdFoodItem" Margin="0, 0, 0, 5">
+                <Grid FocusVisualStyle="{x:Null}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <!--이미지-->
+                        <RowDefinition Height="*"/>
+                        <!--이름 가격-->
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="5">
                         <Image Source="{Binding Image}" Stretch="Uniform"/>
                     </Grid>
                     <!--이름 가격-->
-                    <Grid Grid.Column="1" Margin="20, 0, 0, 0">
-                        <TextBlock x:Name="tbFoodName" Text="{Binding Name}"
-                                   VerticalAlignment="Center" />
-                        <TextBlock x:Name="tbFoodPrice" Text="{Binding Price}"
-                                   VerticalAlignment="Center"/>
+                    <Grid Grid.Row="1">
+                        <StackPanel>
+                            <TextBlock x:Name="tbFoodName" Text="{Binding Name}"
+                                       Style="{StaticResource FoodName}"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="tbFoodPrice" Text="{Binding Price}"
+                                       Style="{StaticResource FoodPrice}"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Grid>
@@ -43,7 +59,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="1" Margin="15 0 0 0" VerticalAlignment="Center"
-                               FontWeight="Bold" FontSize="14" Text="{Binding Name, StringFormat={}{0}학년 }">
+                               FontWeight="Bold" FontSize="14" Text="{Binding Name, StringFormat={}{0}류 }">
                     </TextBlock>
                     <TextBlock Grid.Column="2" Margin="10 0 0 0" VerticalAlignment="Center"
                                FontWeight="Bold" FontSize="14" Text="{Binding Items.Count}" Foreground="#f17100"/>
@@ -62,9 +78,10 @@
             
         </Grid>
 
-        <Grid Grid.Column="1" x:Name="gdMenu">
-            <ListView x:Name="lvDIDEnvInfo" Grid.Column="0" SelectionMode="Single"
+        <Grid Grid.Column="1" x:Name="gdMenu" Background="red">
+            <ListView x:Name="lvFoodInfo" SelectionMode="Single"
                   ItemTemplate="{StaticResource FoodListDataTemplate}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   Background="#fafbfd" BorderThickness="0">
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
@@ -72,6 +89,11 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                     </Style>
                 </ListView.Resources>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
                 <ListView.GroupStyle>
                     <GroupStyle HeaderTemplate="{StaticResource FoodGroupHeaderDataTemplate}"/>
                 </ListView.GroupStyle>

@@ -20,6 +20,8 @@ namespace RestaurantKiosk.Controls
     /// </summary>
     public partial class TableControl : UserControl
     {
+        public event SelectionChangedEventHandler OnSelectionChanged;
+
         public TableControl()
         {
             InitializeComponent();
@@ -28,7 +30,7 @@ namespace RestaurantKiosk.Controls
 
         private void lbTableList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            OnSelectionChanged?.Invoke(sender, e);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace RestaurantKiosk.Controls
             InitializeComponent();
 
             InitMenuCollectionView();
+
         }
 
         private void InitMenuCollectionView()
@@ -44,6 +45,7 @@ namespace RestaurantKiosk.Controls
 
             collectionView.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
 
+            lvFoodInfo.ItemsSource = collectionView;
             
         }
     }

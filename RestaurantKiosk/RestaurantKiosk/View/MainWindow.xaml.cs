@@ -70,5 +70,11 @@ namespace RestaurantKiosk
             }
         }
         #endregion
+
+        private void TableControl_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TableCtrl.Visibility = Visibility.Collapsed;
+            OrderCtrl.Visibility = Visibility.Visible;
+        }
     }
 }

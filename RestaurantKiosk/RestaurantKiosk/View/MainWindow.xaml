@@ -19,7 +19,11 @@
             </Grid>
             
             <Grid Grid.Row="1">
-                <ctrl:TableControl Grid.Column="0"/>
+                <ctrl:TableControl x:Name="TableCtrl"
+                                   Visibility="Visible" 
+                                   OnSelectionChanged="TableControl_OnSelectionChanged"/>
+                <ctrl:OrderControl x:Name="OrderCtrl" 
+                                   Visibility="Collapsed"/>
             </Grid>
         </Grid>
         
