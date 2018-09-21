@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantKiosk.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -73,6 +74,10 @@ namespace RestaurantKiosk
 
         private void TableControl_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            List<TableInfo> item = e.AddedItems.Cast<TableInfo>().ToList();
+
+            OrderCtrl.setCurrentTableInfo(item[0]);
+
             TableCtrl.Visibility = Visibility.Collapsed;
             OrderCtrl.Visibility = Visibility.Visible;
         }

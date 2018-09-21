@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantKiosk.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace RestaurantKiosk.Controls
     /// </summary>
     public partial class OrderControl : UserControl
     {
+        TableInfo currentTableInfo = new TableInfo();
+
         public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
 
         public OrderControl()
@@ -47,6 +50,12 @@ namespace RestaurantKiosk.Controls
 
             lvFoodInfo.ItemsSource = collectionView;
             
+        }
+
+        public void setCurrentTableInfo(TableInfo selectedTable)
+        {
+            currentTableInfo = selectedTable;
+
         }
     }
 }
