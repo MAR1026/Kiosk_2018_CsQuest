@@ -22,7 +22,7 @@ namespace RestaurantKiosk.Controls
     /// </summary>
     public partial class OrderControl : UserControl
     {
-        TableInfo currentTableInfo = new TableInfo();
+        private TableInfo currentTableInfo = new TableInfo();
 
         public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
 
@@ -55,7 +55,16 @@ namespace RestaurantKiosk.Controls
         public void setCurrentTableInfo(TableInfo selectedTable)
         {
             currentTableInfo = selectedTable;
+            currentTableInfo.OrderTime = DateTime.Now;
 
+            gdCurrentTableInfo.DataContext = currentTableInfo;
+            lvOrderInfo.ItemsSource = currentTableInfo.FoodList;
+        }
+
+        private void lvFoodInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
+            App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
         }
     }
 }

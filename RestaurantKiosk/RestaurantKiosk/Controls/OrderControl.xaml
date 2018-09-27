@@ -11,7 +11,8 @@
 
     <UserControl.Resources>
         <converter:FoodCategoryToKoreanConverter x:Key="FoodCategoryToKoreanConverter"/>
-
+        
+        
         <Style x:Key="FoodName" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
@@ -23,7 +24,14 @@
             <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
             <Setter Property="Foreground" Value="Gray"/>
         </Style>
-        
+
+
+        <Style x:Key="TableInfo" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+
         <DataTemplate x:Key="FoodListDataTemplate" DataType="{x:Type model:Food}">
             <Grid x:Name="gdFoodItem" Margin="0, 0, 0, 5">
                 <Grid FocusVisualStyle="{x:Null}">
@@ -69,6 +77,36 @@
                 </Grid>
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="OrderListDataTemplate" DataType="{x:Type model:Food}">
+            <Grid Margin="5" VerticalAlignment="Center">
+                <Grid FocusVisualStyle="{x:Null}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <TextBlock Text="{Binding Name}"
+                                   Margin="10, 0, 0, 0"
+                                   Style="{StaticResource TableInfo}"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <TextBlock Text="{Binding Quantity}"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource TableInfo}"/>
+                    </Grid>
+                    
+                    <Grid Grid.Column="2">
+                        <TextBlock Text="{Binding Price, StringFormat={}{0}원}"
+                                   HorizontalAlignment="Center"
+                                   Style="{StaticResource TableInfo}"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid Background="White">
@@ -84,8 +122,37 @@
                 <RowDefinition Height="0.4*"/>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0" x:Name="gdSelectedMenu" Background="Black">
+            <Grid Grid.Row="0" x:Name="gdSelectedMenu">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" x:Name="gdCurrentTableInfo" 
+                      VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Idx, StringFormat={}{0}번 테이블}" TextAlignment="Left"
+                               Margin="10, 0, 0, 0"
+                               Style="{StaticResource TableInfo}"/>
+                    <TextBlock Text="{Binding OrderTime}" TextAlignment="Right" 
+                               Foreground="Black"
+                               Style="{StaticResource TableInfo}"/>
+                    <Border BorderThickness="0, 0, 0, 1" BorderBrush="Red"
+                            Margin="0, 20, 0, 0"/>
+                </Grid>
                 
+                <Grid Grid.Row="1">
+                    <ListView x:Name="lvOrderInfo" SelectionMode="Single"
+                              ItemTemplate="{StaticResource OrderListDataTemplate}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              Background="#fafbfd" BorderThickness="0">
+                        <ListView.Resources>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.Resources>
+                    </ListView>
+                </Grid>
             </Grid>
 
             <Grid Grid.Row="1" x:Name="gdControlMenu" Background="red">
@@ -101,7 +168,8 @@
             <ListView x:Name="lvFoodInfo" SelectionMode="Single"
                   ItemTemplate="{StaticResource FoodListDataTemplate}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  Background="#fafbfd" BorderThickness="0">
+                  Background="#fafbfd" BorderThickness="0"
+                  SelectionChanged="lvFoodInfo_SelectionChanged">
                 <ListView.Resources>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="Cursor" Value="Hand"/>

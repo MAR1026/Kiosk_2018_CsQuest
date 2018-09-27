@@ -10,15 +10,7 @@
         ContentRendered="Window_ContentRenderd" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid x:Name="gdTableList" Background="Black">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            
-            <Grid Grid.Row="0" Background="White">
-            </Grid>
-            
-            <Grid Grid.Row="1">
+            <Grid >
                 <ctrl:TableControl x:Name="TableCtrl"
                                    Visibility="Visible" 
                                    OnSelectionChanged="TableControl_OnSelectionChanged"/>

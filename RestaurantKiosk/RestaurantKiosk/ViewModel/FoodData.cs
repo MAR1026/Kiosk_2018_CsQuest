@@ -18,7 +18,7 @@ namespace RestaurantKiosk.ViewModel
             {
                 Category = CategoryType.GIMBAP,
                 Name = "돈까스김밥",
-                Quantity = 2,
+                Quantity = 0,
                 Price = 3000,
                 Image = "/Assets/Image/GIMBAP/PorkCutletGIMBAP.jpg",
                 Notice = "주문 즉시 튀겨진 생등심 돈까스로 바삭한 식감의 김밥"
@@ -28,7 +28,7 @@ namespace RestaurantKiosk.ViewModel
             {
                 Category = CategoryType.GIMBAP,
                 Name = "떡갈비김밥",
-                Quantity = 3,
+                Quantity = 0,
                 Price = 3000,
                 Image ="/Assets/Image/GIMBAP/GrilledPattyGIMBAP.jpg",
                 Notice = "떡갈비와 신선한 야채의 담백한 김밥"
@@ -38,7 +38,7 @@ namespace RestaurantKiosk.ViewModel
             {
                 Category = CategoryType.GIMBAP,
                 Name = "새우튀김김밥",
-                Quantity = 5,
+                Quantity = 0,
                 Price = 3000,
                 Image = "/Assets/Image/GIMBAP/FiredShrimpGIMBAP.jpg",
                 Notice = "주문 즉시 튀겨진 새우와 참깨 소스의 고소한 김밥"
