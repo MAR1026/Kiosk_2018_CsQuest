@@ -49,7 +49,28 @@ namespace RestaurantKiosk.Controls
             collectionView.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
 
             lvFoodInfo.ItemsSource = collectionView;
+            lvFoodInfo.SelectedIndex = -1;
+
+        }
+
+        private void RefreshOrderCollectionView()
+        {
+            ICollectionView collectionView = new CollectionViewSource { Source = currentTableInfo.FoodList }.View;
+            collectionView.Filter = QuantityFilter;
             
+            lvOrderInfo.ItemsSource = collectionView;
+        }
+
+        private bool QuantityFilter(object item)
+        {
+            if((item as Food).Quantity <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public void setCurrentTableInfo(TableInfo selectedTable)
@@ -58,13 +79,19 @@ namespace RestaurantKiosk.Controls
             currentTableInfo.OrderTime = DateTime.Now;
 
             gdCurrentTableInfo.DataContext = currentTableInfo;
-            lvOrderInfo.ItemsSource = currentTableInfo.FoodList;
+            RefreshOrderCollectionView();
         }
 
         private void lvFoodInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
-            App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
+            if (currentTableInfo.FoodList != null && lvFoodInfo.SelectedIndex != -1)
+            {
+                List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
+                App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
+                RefreshOrderCollectionView();
+
+                lvFoodInfo.SelectedIndex = -1;
+            }
         }
     }
 }

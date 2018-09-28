@@ -113,17 +113,7 @@ namespace RestaurantKiosk.ViewModel
                 Image = "/Assets/Image/Noodle/ColdNoodle.jpg",
                 Notice = "진한 동치미육수와 쫄깃한 면발의 냉면"
             });
-
-            foods.Add(new Food
-            {
-                Category = CategoryType.RICE,
-                Name = "가츠동",
-                Quantity = 0,
-                Price = 5000,
-                Image = "/Assets/Image/Rice/katsudon.jpg",
-                Notice = "생등심 돈까스를 이용하여 만든 부드러운 맛의 가츠돈"
-            });
-
+            
             foods.Add(new Food
             {
                 Category = CategoryType.RICE,
