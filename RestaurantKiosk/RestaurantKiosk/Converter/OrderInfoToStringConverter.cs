@@ -25,7 +25,7 @@ namespace RestaurantKiosk.Converter
                 {
                     if(item.Quantity > 0)
                     {
-                        result += item.Name + "×" + item.Quantity + "\n";
+                        result += item.Name + " × " + item.Quantity + "\n";
                     }
                     
                 }

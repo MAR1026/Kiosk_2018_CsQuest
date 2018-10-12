@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RestaurantKiosk.Model;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,19 +20,58 @@ namespace RestaurantKiosk.Controls
     /// <summary>
     /// Interaction logic for TableControl.xaml
     /// </summary>
-    public partial class TableControl : UserControl
+    public partial class TableControl : UserControl, INotifyPropertyChanged
     {
         public event SelectionChangedEventHandler OnSelectionChanged;
+
+        public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
 
         public TableControl()
         {
             InitializeComponent();
-            lbTableList.ItemsSource = App.tableViewModel.Items;
+            InitTableCollectionView();
+        }
+
+        
+        private void InitTableCollectionView()
+        {
+            ICollectionView collectionView = new CollectionViewSource { Source = App.tableViewModel.Items }.View;
+
+            lbTableList.ItemsSource = collectionView;
+            lbTableList.SelectedIndex = -1;
+
+        }
+
+        private void RefreshTableCollectionView()
+        {
+            ICollectionView collectionView = new CollectionViewSource { Source = App.tableViewModel.Items }.View;
+            collectionView.Refresh();
+
+            lbTableList.ItemsSource = collectionView;
+        }
+
+        public void RefreshTableList()
+        {
+            RefreshTableCollectionView();
         }
 
         private void lbTableList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OnSelectionChanged?.Invoke(sender, e);
+            if (lbTableList.SelectedIndex == -1)
+            {
+                return;
+            }
+            else
+            {
+                OnSelectionChanged?.Invoke(sender, e);
+                lbTableList.SelectedIndex = -1;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
         }
     }
 }

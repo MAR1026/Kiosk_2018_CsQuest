@@ -39,6 +39,29 @@
             <Setter Property="Foreground" Value="White"/>
         </Style>
 
+        <Style x:Key="RoundButtonTemplate" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="white"/>
+            <Setter Property="Margin" Value="120,0,120,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10" Background="{TemplateBinding Background}"
+                                BorderThickness="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <DataTemplate x:Key="FoodListDataTemplate" DataType="{x:Type model:Food}">
             <Grid x:Name="gdFoodItem" Margin="0, 0, 0, 5">
                 <Grid FocusVisualStyle="{x:Null}">
@@ -189,7 +212,20 @@
             </Grid>
 
             <Grid Grid.Row="1" x:Name="gdControlMenu" Background="red">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".6*"/>
+                    <RowDefinition Height=".4*"/>
+                </Grid.RowDefinitions>
 
+                <Grid Grid.Row="0">
+                    <Button x:Name="btnOrder" Style="{StaticResource RoundButtonTemplate}"
+                            Content="주문하기"
+                            Click="btnOrder_Click"/>
+                </Grid>
+                
+                <Grid Grid.Row="1">
+                    
+                </Grid>
             </Grid>
 
             <Grid Grid.Row="2" x:Name="gdMenuImage" Background="Yellow">

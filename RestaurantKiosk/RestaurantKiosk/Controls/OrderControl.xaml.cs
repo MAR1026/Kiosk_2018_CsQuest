@@ -22,16 +22,19 @@ namespace RestaurantKiosk.Controls
     /// </summary>
     public partial class OrderControl : UserControl
     {
-        private TableInfo currentTableInfo = new TableInfo();
+        public delegate void BackToMainHandler(object sender, EventArgs args);
+        public event BackToMainHandler OnBackToMain;
 
+        private TableInfo currentTableInfo = new TableInfo();
         public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
+
+        
 
         public OrderControl()
         {
             InitializeComponent();
 
             InitMenuCollectionView();
-
         }
 
         private void InitMenuCollectionView()
@@ -92,6 +95,17 @@ namespace RestaurantKiosk.Controls
 
                 lvFoodInfo.SelectedIndex = -1;
             }
+        }
+
+        private void btnOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedTable = App.tableViewModel.Items.FirstOrDefault(x => x.Idx == currentTableInfo.Idx); 
+                
+            if(selectedTable != null)
+            {
+                selectedTable = currentTableInfo;
+            }
+            OnBackToMain?.Invoke(sender, e);
         }
     }
 }

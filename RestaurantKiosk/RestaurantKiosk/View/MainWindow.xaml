@@ -15,7 +15,8 @@
                                    Visibility="Visible" 
                                    OnSelectionChanged="TableControl_OnSelectionChanged"/>
                 <ctrl:OrderControl x:Name="OrderCtrl" 
-                                   Visibility="Collapsed"/>
+                                   Visibility="Collapsed"
+                                   OnBackToMain="OrderCtrl_OnBackToMain"/>
             </Grid>
         </Grid>
         

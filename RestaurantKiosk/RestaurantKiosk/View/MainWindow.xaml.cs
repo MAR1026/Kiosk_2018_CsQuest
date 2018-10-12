@@ -33,9 +33,7 @@ namespace RestaurantKiosk
         {
             gdTableList.Visibility = Visibility.Collapsed;
         }
-
-
-
+        
         #region 로딩 관련 메소드들
         private void Window_ContentRenderd(object sender, EventArgs e)
         {
@@ -80,6 +78,14 @@ namespace RestaurantKiosk
 
             TableCtrl.Visibility = Visibility.Collapsed;
             OrderCtrl.Visibility = Visibility.Visible;
+        }
+
+        private void OrderCtrl_OnBackToMain(object sender, EventArgs args)
+        {
+            TableCtrl.RefreshTableList();
+
+            TableCtrl.Visibility = Visibility.Visible;
+            OrderCtrl.Visibility = Visibility.Collapsed;
         }
     }
 }
