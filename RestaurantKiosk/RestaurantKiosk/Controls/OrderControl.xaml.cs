@@ -90,8 +90,18 @@ namespace RestaurantKiosk.Controls
             if (currentTableInfo.FoodList != null && lvFoodInfo.SelectedIndex != -1)
             {
                 List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
-                App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
-                RefreshOrderCollectionView();
+
+                bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem[0]);
+
+                if(isExist == true)
+                {
+                    MessageBox.Show("이미 주문한 메뉴입니다. 왼쪽 버튼을 이용하세요.", "메뉴 추가 실패", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
+                    RefreshOrderCollectionView();
+                }
 
                 lvFoodInfo.SelectedIndex = -1;
             }
@@ -106,6 +116,16 @@ namespace RestaurantKiosk.Controls
                 selectedTable = currentTableInfo;
             }
             OnBackToMain?.Invoke(sender, e);
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCancelAll_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -43,7 +43,7 @@
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="white"/>
-            <Setter Property="Margin" Value="120,0,120,0"/>
+            <Setter Property="Width" Value="125"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -51,8 +51,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="10" Background="{TemplateBinding Background}"
-                                BorderThickness="3">
+                        <Border CornerRadius="8" Background="{TemplateBinding Background}"
+                                BorderThickness="2">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
 
                             </ContentPresenter>
@@ -177,7 +177,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Background="red">
+                    <Grid Grid.Row="0" Background="Black">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.3*"/>
                             <ColumnDefinition Width="0.2*"/>
@@ -211,20 +211,27 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="1" x:Name="gdControlMenu" Background="red">
+            <Grid Grid.Row="1" x:Name="gdControlMenu" Background="Black">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height=".6*"/>
-                    <RowDefinition Height=".4*"/>
+                    <RowDefinition Height=".5*"/>
+                    <RowDefinition Height=".5*"/>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
                     <Button x:Name="btnOrder" Style="{StaticResource RoundButtonTemplate}"
-                            Content="주문하기"
+                            Content="주문하기" 
                             Click="btnOrder_Click"/>
                 </Grid>
                 
-                <Grid Grid.Row="1">
-                    
+                <Grid Grid.Row="1" Margin="0, 5, 0, 2">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="btnCancel" Style="{StaticResource RoundButtonTemplate}"
+                                Content="취소" Margin="10, 0, 0, 0"
+                                Click="btnCancel_Click"/>
+                        <Button x:Name="btnCancelAll" Style="{StaticResource RoundButtonTemplate}"
+                                Content="전체취소" Margin="10, 0, 0, 0"
+                                Click="btnCancelAll_Click"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
 

@@ -11,7 +11,7 @@ namespace RestaurantKiosk.ViewModel
 {
     public partial class TableViewModel
     {
-        public ObservableCollection<TableInfo> Items { get; }
+        public ObservableCollection<TableInfo> Items { get; set; }
 
         public TableViewModel()
         {
@@ -86,6 +86,28 @@ namespace RestaurantKiosk.ViewModel
             }
         }
 
+        public bool IsExist(TableInfo table, Food selectedFood)
+        {
+            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+
+            if (item != null)
+            {
+                var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+
+                if (food.Quantity > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
         /*
