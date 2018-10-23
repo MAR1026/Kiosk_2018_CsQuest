@@ -90,7 +90,6 @@ namespace RestaurantKiosk.Controls
             if (currentTableInfo.FoodList != null && lvFoodInfo.SelectedIndex != -1)
             {
                 List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
-
                 bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem[0]);
 
                 if(isExist == true)
@@ -120,12 +119,69 @@ namespace RestaurantKiosk.Controls
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            if(currentTableInfo.FoodList != null && lvOrderInfo.SelectedIndex != -1)
+            {
+                Food selectedItem = lvOrderInfo.SelectedItem as Food;
+                bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem);
 
+                if (isExist)
+                {
+                    App.tableViewModel.Delete(currentTableInfo, selectedItem);
+                    RefreshOrderCollectionView();
+                }
+            }
         }
 
         private void btnCancelAll_Click(object sender, RoutedEventArgs e)
         {
+            if(currentTableInfo.FoodList != null)
+            {
+                App.tableViewModel.DeleteAll(currentTableInfo);
+                RefreshOrderCollectionView();
+            }
+        }
 
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        {
+            if(currentTableInfo.FoodList != null && lvOrderInfo.SelectedIndex != -1)
+            {
+                Food selectedItem = lvOrderInfo.SelectedItem as Food;
+                bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem);
+
+                if (isExist)
+                {
+                    App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem);
+                }
+                else
+                {
+                    MessageBox.Show("메뉴 수량 증가에 실패하였습니다.", "수량 증가 실패", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void btnMinus_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentTableInfo.FoodList != null && lvOrderInfo.SelectedIndex != -1)
+            {
+                Food selectedItem = lvOrderInfo.SelectedItem as Food;
+
+                bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem);
+
+                if (isExist)
+                {
+                    App.tableViewModel.DecreaseQuantity(currentTableInfo, selectedItem);
+
+                    isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem);
+                    if (!isExist)
+                    {
+                        RefreshOrderCollectionView();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("메뉴 수량 감소에 실패하였습니다.", "수량 감소 실패", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

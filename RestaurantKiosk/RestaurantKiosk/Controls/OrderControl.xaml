@@ -223,14 +223,20 @@
                             Click="btnOrder_Click"/>
                 </Grid>
                 
-                <Grid Grid.Row="1" Margin="0, 5, 0, 2">
+                <Grid Grid.Row="1" Margin="0, 5, 0, 2" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <Button x:Name="btnCancel" Style="{StaticResource RoundButtonTemplate}"
-                                Content="취소" Margin="10, 0, 0, 0"
+                                Content="취소"
                                 Click="btnCancel_Click"/>
                         <Button x:Name="btnCancelAll" Style="{StaticResource RoundButtonTemplate}"
                                 Content="전체취소" Margin="10, 0, 0, 0"
                                 Click="btnCancelAll_Click"/>
+                        <Button x:Name="btnPlus" Style="{StaticResource RoundButtonTemplate}"
+                                Content="수량 증가" Margin="10, 0, 0, 0"
+                                Click="btnPlus_Click"/>
+                        <Button x:Name="btnMinus" Style="{StaticResource RoundButtonTemplate}"
+                                Content="수량 감소" Margin="10, 0, 0, 0"
+                                Click="btnMinus_Click"/>
                     </StackPanel>
                 </Grid>
             </Grid>

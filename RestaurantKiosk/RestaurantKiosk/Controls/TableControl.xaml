@@ -26,7 +26,7 @@
                 </Grid>
                 <Border BorderBrush="Red" BorderThickness="0, 0, 0, 1"/>
                 <Grid Grid.Row="1" Margin="0, 20, 0, 0">
-                    <TextBlock x:Name="tbMenuName" Margin="20, 0, 0, 0"
+                    <TextBlock x:Name="tbMenuName" Margin="10, 0, 0, 0"
                                Text="{Binding FoodList, Converter={StaticResource OrderInfoToStringConverter}}"
                                FontSize="20" FontFamily="NanumSquareRound Bold" 
                                Foreground="Black"/>

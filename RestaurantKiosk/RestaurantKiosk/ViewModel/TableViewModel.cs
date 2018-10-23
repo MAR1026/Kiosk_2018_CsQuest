@@ -47,20 +47,21 @@ namespace RestaurantKiosk.ViewModel
 
             if(item != null)
             {
-                TableInfo refreshItem = new TableInfo();
-                refreshItem.Idx = item.Idx;
-
-                item = refreshItem;
+                foreach(Food food in item.FoodList)
+                {
+                    food.Quantity = 0;
+                }
             }
         }
 
-        public void Delete(TableInfo table, Food food)
+        public void Delete(TableInfo table, Food selectedFood)
         {
             var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
             if(item != null)
             {
-                item.FoodList.Remove(food);
+                var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+                food.Quantity = 0;
             }
         }
 
