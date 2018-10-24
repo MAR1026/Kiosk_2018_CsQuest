@@ -51,6 +51,8 @@ namespace RestaurantKiosk.ViewModel
                 {
                     food.Quantity = 0;
                 }
+
+                item.TotalPrice = 0;
             }
         }
 
@@ -61,6 +63,11 @@ namespace RestaurantKiosk.ViewModel
             if(item != null)
             {
                 var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+                for(int num = 0; num < food.Quantity; num++)
+                {
+                    DecreaseTotalPrice(table, selectedFood);
+                }
+                
                 food.Quantity = 0;
             }
         }
@@ -84,6 +91,26 @@ namespace RestaurantKiosk.ViewModel
             {
                 var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
                 food.Quantity -= 1;
+            }
+        }
+
+        public void IncreaseTotalPrice(TableInfo table, Food selectedFood)
+        {
+            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+
+            if (item != null)
+            {
+                item.TotalPrice += selectedFood.Price;
+            }
+        }
+
+        public void DecreaseTotalPrice(TableInfo table, Food selectedFood)
+        {
+            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+
+            if (item != null)
+            {
+                item.TotalPrice -= selectedFood.Price;
             }
         }
 

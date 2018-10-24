@@ -62,6 +62,7 @@ namespace RestaurantKiosk.Controls
             collectionView.Filter = QuantityFilter;
             
             lvOrderInfo.ItemsSource = collectionView;
+            tbTotalPrice.DataContext = currentTableInfo;
         }
 
         private bool QuantityFilter(object item)
@@ -99,6 +100,7 @@ namespace RestaurantKiosk.Controls
                 else
                 {
                     App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
+                    App.tableViewModel.IncreaseTotalPrice(currentTableInfo, selectedItem[0]);
                     RefreshOrderCollectionView();
                 }
 
@@ -151,6 +153,7 @@ namespace RestaurantKiosk.Controls
                 if (isExist)
                 {
                     App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem);
+                    App.tableViewModel.IncreaseTotalPrice(currentTableInfo, selectedItem);
                 }
                 else
                 {
@@ -170,6 +173,7 @@ namespace RestaurantKiosk.Controls
                 if (isExist)
                 {
                     App.tableViewModel.DecreaseQuantity(currentTableInfo, selectedItem);
+                    App.tableViewModel.DecreaseTotalPrice(currentTableInfo, selectedItem);
 
                     isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem);
                     if (!isExist)

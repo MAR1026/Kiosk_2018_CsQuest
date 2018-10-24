@@ -174,7 +174,8 @@
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="0.8*"/>
+                        <RowDefinition Height="0.1*"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Background="Black">
@@ -208,6 +209,11 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
+
+                    <TextBlock x:Name="tbTotalPrice" Grid.Row="2" 
+                               HorizontalAlignment="Center" VerticalAlignment="Center" 
+                               Text="{Binding TotalPrice, StringFormat={}합계: {0}원}" 
+                               Foreground="Black" Style="{StaticResource TableInfo}"/>
                 </Grid>
             </Grid>
 
@@ -218,8 +224,8 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <Button x:Name="btnOrder" Style="{StaticResource RoundButtonTemplate}"
-                            Content="주문하기" 
+                    <Button x:Name="btnOrder" Content="주문하기" 
+                            Style="{StaticResource RoundButtonTemplate}"
                             Click="btnOrder_Click"/>
                 </Grid>
                 
