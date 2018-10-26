@@ -10,12 +10,12 @@ namespace RestaurantKiosk.Model
 {
     public enum CategoryType
     {
+        All = 0,
         GIMBAP = 1,
         NOODLE = 2,
         RICE = 3,
         STEW = 4,
-        FRIED = 5,
-        SNACK = 6
+        SNACK = 5
     }
 
     public class Food : INotifyPropertyChanged

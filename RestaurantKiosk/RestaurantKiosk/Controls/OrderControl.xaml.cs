@@ -26,9 +26,10 @@ namespace RestaurantKiosk.Controls
         public event BackToMainHandler OnBackToMain;
 
         private TableInfo currentTableInfo = new TableInfo();
-        public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
+        private CategoryType currentCategorytype = new CategoryType();
+        // public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
 
-        
+
 
         public OrderControl()
         {
@@ -37,12 +38,23 @@ namespace RestaurantKiosk.Controls
             InitMenuCollectionView();
         }
 
+        
+        public void setCurrentTableInfo(TableInfo selectedTable)
+        {
+            currentTableInfo = selectedTable;
+            currentTableInfo.OrderTime = DateTime.Now;
+
+            gdCurrentTableInfo.DataContext = currentTableInfo;
+            RefreshOrderCollectionView();
+        }
+
+        #region CollectionView 관련
         private void InitMenuCollectionView()
         {
             ICollectionView collectionView = new CollectionViewSource { Source = App.foodViewModel.Items }.View;
-            collectionView.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
+            // collectionView.GroupDescriptions.Add(new PropertyGroupDescription("Category"));
 
-            CategoryLiveShaping = collectionView as ICollectionViewLiveShaping;
+            /* CategoryLiveShaping = collectionView as ICollectionViewLiveShaping;
             if (CategoryLiveShaping.CanChangeLiveGrouping)
             {
                 CategoryLiveShaping.LiveGroupingProperties.Add("Category");
@@ -50,11 +62,15 @@ namespace RestaurantKiosk.Controls
             }
 
             collectionView.SortDescriptions.Add(new SortDescription("Category", ListSortDirection.Ascending));
+            */
 
             lvFoodInfo.ItemsSource = collectionView;
             lvFoodInfo.SelectedIndex = -1;
 
+            //lvFoodCategory.ItemsSource = CategoryType;
+
         }
+
 
         private void RefreshOrderCollectionView()
         {
@@ -63,6 +79,31 @@ namespace RestaurantKiosk.Controls
             
             lvOrderInfo.ItemsSource = collectionView;
             tbTotalPrice.DataContext = currentTableInfo;
+        }
+
+        private void RefreshFoodCollectionView()
+        {
+            ICollectionView collectionView = new CollectionViewSource { Source = App.foodViewModel.Items }.View;
+            if (currentCategorytype != CategoryType.All)
+            {
+                collectionView.Filter = CateGoryFilter;
+            }
+
+            //Todo : ItemsSource 바뀌면 메뉴 선택되는 오류 고치기
+            lvFoodInfo.ItemsSource = collectionView;
+            lvFoodInfo.SelectedIndex = -1;
+        }
+
+        private bool CateGoryFilter(object item)
+        {
+            if ((item as Food).Category == currentCategorytype)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private bool QuantityFilter(object item)
@@ -76,37 +117,9 @@ namespace RestaurantKiosk.Controls
                 return true;
             }
         }
+        #endregion
 
-        public void setCurrentTableInfo(TableInfo selectedTable)
-        {
-            currentTableInfo = selectedTable;
-            currentTableInfo.OrderTime = DateTime.Now;
-
-            gdCurrentTableInfo.DataContext = currentTableInfo;
-            RefreshOrderCollectionView();
-        }
-
-        private void lvFoodInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (currentTableInfo.FoodList != null && lvFoodInfo.SelectedIndex != -1)
-            {
-                List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
-                bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem[0]);
-
-                if(isExist == true)
-                {
-                    MessageBox.Show("이미 주문한 메뉴입니다. 왼쪽 버튼을 이용하세요.", "메뉴 추가 실패", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
-                    App.tableViewModel.IncreaseTotalPrice(currentTableInfo, selectedItem[0]);
-                    RefreshOrderCollectionView();
-                }
-
-                lvFoodInfo.SelectedIndex = -1;
-            }
-        }
+        #region button cllik
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -116,6 +129,8 @@ namespace RestaurantKiosk.Controls
             {
                 selectedTable = currentTableInfo;
             }
+
+            gdMenuImage.DataContext = null;
             OnBackToMain?.Invoke(sender, e);
         }
 
@@ -128,6 +143,7 @@ namespace RestaurantKiosk.Controls
 
                 if (isExist)
                 {
+                    gdMenuImage.DataContext = null;
                     App.tableViewModel.Delete(currentTableInfo, selectedItem);
                     RefreshOrderCollectionView();
                 }
@@ -138,6 +154,7 @@ namespace RestaurantKiosk.Controls
         {
             if(currentTableInfo.FoodList != null)
             {
+                gdMenuImage.DataContext = null;
                 App.tableViewModel.DeleteAll(currentTableInfo);
                 RefreshOrderCollectionView();
             }
@@ -178,6 +195,7 @@ namespace RestaurantKiosk.Controls
                     isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem);
                     if (!isExist)
                     {
+                        gdMenuImage.DataContext = null;
                         RefreshOrderCollectionView();
                     }
                 }
@@ -187,5 +205,49 @@ namespace RestaurantKiosk.Controls
                 }
             }
         }
+        #endregion
+
+        #region listview selectionChanged
+        private void lvFoodInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (currentTableInfo.FoodList != null && lvFoodInfo.SelectedIndex != -1)
+            {
+                List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
+                bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem[0]);
+
+                if (isExist == true)
+                {
+                    gdMenuImage.DataContext = null;
+                    MessageBox.Show("이미 주문한 메뉴입니다. 왼쪽 버튼을 이용하세요.", "메뉴 추가 실패", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    gdMenuImage.DataContext = selectedItem[0];
+                    App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
+                    App.tableViewModel.IncreaseTotalPrice(currentTableInfo, selectedItem[0]);
+                    RefreshOrderCollectionView();
+                }
+
+                lvFoodInfo.SelectedIndex = -1;
+            }
+        }
+
+        private void lvOrderInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvOrderInfo.SelectedIndex != -1)
+            {
+                gdMenuImage.DataContext = lvOrderInfo.SelectedItem as Food;
+            }
+        }
+
+        private void lvFoodCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(lvFoodCategory.SelectedIndex != -1)
+            {
+                currentCategorytype = e.AddedItems.Cast<CategoryType>().ToList()[0];
+                RefreshFoodCollectionView();
+            }
+        }
+        #endregion
     }
 }

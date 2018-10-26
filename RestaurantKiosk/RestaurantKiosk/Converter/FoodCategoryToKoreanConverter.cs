@@ -18,28 +18,31 @@ namespace RestaurantKiosk.Converter
 
             switch (category)
             {
+                case CategoryType.All:
+                    result = "전체";
+                    break;
+
                 case CategoryType.GIMBAP:
-                    result = "김밥";
+                    result = "김밥류";
                     break;
 
                 case CategoryType.NOODLE:
-                    result = "면";
+                    result = "면류";
                     break;
 
                 case CategoryType.RICE:
-                    result = "밥";
+                    result = "밥류";
                     break;
 
                 case CategoryType.SNACK:
-                    result = "분식";
+                    result = "분식류";
                     break;
 
                 case CategoryType.STEW:
-                    result = "국 / 찌개";
+                    result = "국 / 찌개류";
                     break;
 
                 default:
-                    result = "";
                     break;
             }
 
