@@ -27,6 +27,8 @@ namespace RestaurantKiosk.Controls
 
         private TableInfo currentTableInfo = new TableInfo();
         private CategoryType currentCategorytype = new CategoryType();
+
+        private bool foodCollectionViewFlag = false;
         // public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
 
 
@@ -89,8 +91,10 @@ namespace RestaurantKiosk.Controls
                 collectionView.Filter = CateGoryFilter;
             }
 
-            //Todo : ItemsSource 바뀌면 메뉴 선택되는 오류 고치기
+            foodCollectionViewFlag = true;
             lvFoodInfo.ItemsSource = collectionView;
+
+            foodCollectionViewFlag = false;
             lvFoodInfo.SelectedIndex = -1;
         }
 
@@ -210,7 +214,7 @@ namespace RestaurantKiosk.Controls
         #region listview selectionChanged
         private void lvFoodInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (currentTableInfo.FoodList != null && lvFoodInfo.SelectedIndex != -1)
+            if (currentTableInfo.FoodList != null && lvFoodInfo.SelectedIndex != -1 && foodCollectionViewFlag != true)
             {
                 List<Food> selectedItem = e.AddedItems.Cast<Food>().ToList();
                 bool isExist = App.tableViewModel.IsExist(currentTableInfo, selectedItem[0]);
