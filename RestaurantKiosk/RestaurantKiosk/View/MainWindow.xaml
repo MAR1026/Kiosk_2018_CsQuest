@@ -9,18 +9,33 @@
         Title="MainWindow" MinHeight="720" MinWidth="1080" 
         ContentRendered="Window_ContentRenderd" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Grid x:Name="gdTableList" Background="Black">
-            <Grid >
-                <ctrl:TableControl x:Name="TableCtrl"
-                                   Visibility="Visible" 
-                                   OnSelectionChanged="TableControl_OnSelectionChanged"/>
-                <ctrl:OrderControl x:Name="OrderCtrl" 
-                                   Visibility="Collapsed"
-                                   OnBackToMain="OrderCtrl_OnBackToMain"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" x:Name="gdHeader" Background="Black">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*"/>
+                <ColumnDefinition Width=".5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" x:Name="gdOptions">
+                
+            </Grid>
+            <Grid Grid.Column="1" x:Name="gdCurTime">
+                <TextBlock Text="{Binding CurTime, Mode=TwoWay}" VerticalAlignment="Center"
+                           FontSize="24" FontFamily="NanumSquareRound Bold" TextAlignment="Center"
+                           Foreground="White"/>
             </Grid>
         </Grid>
-        
-        <Grid x:Name="gdProgress">
+
+        <ctrl:TableControl  x:Name="TableCtrl" Grid.Row="1"
+                            Visibility="Visible" 
+                            OnSelectionChanged="TableControl_OnSelectionChanged"/>
+        <ctrl:OrderControl x:Name="OrderCtrl" Grid.RowSpan="2"
+                               Visibility="Collapsed"
+                               OnBackToMain="OrderCtrl_OnBackToMain"/>
+
+        <Grid x:Name="gdProgress" Grid.RowSpan="2" Background="White">
             <ProgressBar x:Name="pbStatus" Minimum="0" Maximum="100"
                          Width="200" Height="20"/>
         </Grid>

@@ -110,6 +110,19 @@ namespace RestaurantKiosk.Model
             }
         }
 
+        public Food Clone(Food item)
+        {
+            Food Food = new Food();
+            Food.Category = item.Category;
+            Food.Image = item.Image;
+            Food.Notice = item.Notice;
+            Food.Quantity = item.Quantity;
+            Food.Price = item.Price;
+            Food.Name = item.Name;
+
+            return Food;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
         {

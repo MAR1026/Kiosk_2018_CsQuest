@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,11 +44,21 @@ namespace RestaurantKiosk.Controls
         
         public void setCurrentTableInfo(TableInfo selectedTable)
         {
-            currentTableInfo = selectedTable;
-            currentTableInfo.OrderTime = DateTime.Now;
+            //currentTableInfo.FoodList = new List<Food>();
+
+            //foreach(Food item in selectedTable.FoodList)
+            //{
+            //    Debug.WriteLine(item.Name);
+            //    currentTableInfo.FoodList.Add(item);
+            //}
+            currentTableInfo.Idx = selectedTable.Idx;
+            currentTableInfo.TotalPrice = selectedTable.TotalPrice;
+            currentTableInfo.OrderTime = selectedTable.OrderTime;
+            currentTableInfo.FoodList = App.tableViewModel.Clone(selectedTable);
 
             gdCurrentTableInfo.DataContext = currentTableInfo;
             RefreshOrderCollectionView();
+            gdMenuImage.DataContext = null;
         }
 
         #region CollectionView 관련
@@ -127,11 +138,16 @@ namespace RestaurantKiosk.Controls
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
+            
             var selectedTable = App.tableViewModel.Items.FirstOrDefault(x => x.Idx == currentTableInfo.Idx); 
                 
             if(selectedTable != null)
             {
-                selectedTable = currentTableInfo;
+                selectedTable.OrderTime = DateTime.Now;
+                selectedTable.Idx = currentTableInfo.Idx;
+                selectedTable.TotalPrice = currentTableInfo.TotalPrice;
+                selectedTable.FoodList = App.tableViewModel.Clone(currentTableInfo);
+                gdMenuImage.DataContext = null;
             }
 
             gdMenuImage.DataContext = null;
@@ -209,6 +225,13 @@ namespace RestaurantKiosk.Controls
                 }
             }
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            gdMenuImage.DataContext = null;
+            OnBackToMain?.Invoke(sender, e);
+
+        }
         #endregion
 
         #region listview selectionChanged
@@ -253,5 +276,7 @@ namespace RestaurantKiosk.Controls
             }
         }
         #endregion
+
+        
     }
 }

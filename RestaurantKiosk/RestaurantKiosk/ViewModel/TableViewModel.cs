@@ -43,84 +43,110 @@ namespace RestaurantKiosk.ViewModel
 
         public void DeleteAll(TableInfo table)
         {
-            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+            //var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
-            if(item != null)
+            //if(item != null)
+            //{
+            //    foreach(Food food in item.FoodList)
+            //    {
+            //        food.Quantity = 0;
+            //    }
+
+            //    item.TotalPrice = 0;
+            //}
+
+            foreach(Food food in table.FoodList)
             {
-                foreach(Food food in item.FoodList)
-                {
-                    food.Quantity = 0;
-                }
-
-                item.TotalPrice = 0;
+                food.Quantity = 0;
             }
+
+            table.TotalPrice = 0;
         }
 
         public void Delete(TableInfo table, Food selectedFood)
         {
-            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+            //var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
-            if(item != null)
+            //if(item != null)
+            //{
+            //    var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+            //    for(int num = 0; num < food.Quantity; num++)
+            //    {
+            //        DecreaseTotalPrice(table, selectedFood);
+            //    }
+
+            //    food.Quantity = 0;
+            //}
+
+            var food = table.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+            for(int num = 0; num < food.Quantity; num++)
             {
-                var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
-                for(int num = 0; num < food.Quantity; num++)
-                {
-                    DecreaseTotalPrice(table, selectedFood);
-                }
-                
-                food.Quantity = 0;
+                DecreaseTotalPrice(table, selectedFood);
             }
+
+            food.Quantity = 0;
         }
 
         public void IncreaseQuantity(TableInfo table, Food selectedFood)
         {
-            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+            //var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
-            if(item != null)
-            {
-                var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
-                food.Quantity += 1;
-            }
+            //if(item != null)
+            //{
+            //    var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+            //    food.Quantity += 1;
+            //}
+
+            var food = table.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+            food.Quantity += 1;
+
         }
 
         public void DecreaseQuantity(TableInfo table, Food selectedFood)
         {
-            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+            //var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
-            if (item != null)
-            {
-                var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
-                food.Quantity -= 1;
-            }
+            //if (item != null)
+            //{
+            //    var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+            //    food.Quantity -= 1;
+            //}
+
+            var food = table.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+            food.Quantity -= 1;
         }
 
         public void IncreaseTotalPrice(TableInfo table, Food selectedFood)
         {
-            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+            //var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
-            if (item != null)
-            {
-                item.TotalPrice += selectedFood.Price;
-            }
+            //if (item != null)
+            //{
+            //    item.TotalPrice += selectedFood.Price;
+            //}
+
+            table.TotalPrice += selectedFood.Price;
         }
 
         public void DecreaseTotalPrice(TableInfo table, Food selectedFood)
         {
-            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+            //var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
-            if (item != null)
-            {
-                item.TotalPrice -= selectedFood.Price;
-            }
+            //if (item != null)
+            //{
+            //    item.TotalPrice -= selectedFood.Price;
+            //}
+
+            table.TotalPrice -= selectedFood.Price;
         }
 
         public bool IsExist(TableInfo table, Food selectedFood)
         {
-            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+            // var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
 
-            if (item != null)
+            if (table != null)
             {
-                var food = item.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
+                var food = table.FoodList.FirstOrDefault(x => x.Name == selectedFood.Name);
 
                 if (food.Quantity > 0)
                 {
@@ -135,6 +161,18 @@ namespace RestaurantKiosk.ViewModel
             {
                 return false;
             }
+        }
+
+        public List<Food> Clone(TableInfo item)
+        {
+            List<Food> foods = new List<Food>();
+
+            foreach(Food food in item.FoodList)
+            {
+                foods.Add(food.Clone(food));
+            }
+
+            return foods;
         }
 
 
