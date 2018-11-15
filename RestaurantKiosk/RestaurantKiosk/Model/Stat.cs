@@ -4,21 +4,31 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 
 namespace RestaurantKiosk.Model
 {
-    public enum CategoryType
+    public enum PaymentType
     {
-        All = 0,
-        GIMBAP = 1,
-        NOODLE = 2,
-        RICE = 3,
-        STEW = 4,
-        SNACK = 5
+        CASH = 0,
+        CREDIT_CARD = 1
     }
-    public class Food : INotifyPropertyChanged
+
+    public class Stat : INotifyPropertyChanged
     {
+        private PaymentType paymentType;
+        public PaymentType PaymentType
+        {
+            get
+            {
+                return paymentType;
+            }
+            set
+            {
+                paymentType = value;
+                NotifyPropertyChanged(nameof(PaymentType));
+            }
+        }
+
         private CategoryType category;
         public CategoryType Category
         {
@@ -33,7 +43,7 @@ namespace RestaurantKiosk.Model
                 NotifyPropertyChanged(nameof(Category));
             }
         }
-        
+
         private string name;
         public string Name
         {
@@ -64,62 +74,19 @@ namespace RestaurantKiosk.Model
             }
         }
 
-        private int price;
-        public int Price
+        private int totalPrice;
+        public int TotalPrice
         {
             get
             {
-                return price;
+                return totalPrice;
             }
 
             set
             {
-                price = value;
-                NotifyPropertyChanged(nameof(Price));
+                totalPrice = value;
+                NotifyPropertyChanged(nameof(totalPrice));
             }
-        }
-
-        private string image;
-        public string Image
-        {
-            get
-            {
-                return image;
-            }
-
-            set
-            {
-                image = value;
-                NotifyPropertyChanged(nameof(Image));
-            }
-        }
-
-        private string notice;
-        public string Notice
-        {
-            get
-            {
-                return notice;
-            }
-
-            set
-            {
-                notice = value;
-                NotifyPropertyChanged(nameof(Notice));
-            }
-        }
-
-        public Food Clone(Food item)
-        {
-            Food Food = new Food();
-            Food.Category = item.Category;
-            Food.Image = item.Image;
-            Food.Notice = item.Notice;
-            Food.Quantity = item.Quantity;
-            Food.Price = item.Price;
-            Food.Name = item.Name;
-
-            return Food;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

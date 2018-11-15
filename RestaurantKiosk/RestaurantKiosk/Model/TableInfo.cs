@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantKiosk.Model
 {
+
     public class TableInfo : INotifyPropertyChanged
     {
         private int idx;

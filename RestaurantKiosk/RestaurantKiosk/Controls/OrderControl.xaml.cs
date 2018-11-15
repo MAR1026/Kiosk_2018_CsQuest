@@ -149,7 +149,7 @@ namespace RestaurantKiosk.Controls
                 selectedTable.FoodList = App.tableViewModel.Clone(currentTableInfo);
                 gdMenuImage.DataContext = null;
             }
-
+            
             gdMenuImage.DataContext = null;
             OnBackToMain?.Invoke(sender, e);
         }
@@ -275,8 +275,43 @@ namespace RestaurantKiosk.Controls
                 RefreshFoodCollectionView();
             }
         }
+
         #endregion
 
-        
+        private void btnPayment_Click(object sender, RoutedEventArgs e)
+        {
+            PaymentType paymentType = new PaymentType();
+
+            if(MessageBox.Show("카드 결제입니까? (아니요 시 현금결제)", "결제 방식 선택", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                paymentType = PaymentType.CREDIT_CARD;
+                //App.foodViewModel.AddStat(currentTableInfo, PaymentType.CREDIT_CARD);
+            }
+            else
+            {
+                paymentType = PaymentType.CASH;
+            }
+
+            //MessageBox.Show(result, "dd", MessageBoxButton.OKCancel);
+        }
+
+        private string FoodListToString()
+        {
+            string result = string.Empty;
+
+            foreach(Food food in currentTableInfo.FoodList)
+            {
+                if(food.Quantity > 0)
+                {
+                    result += food.Name + "\n";
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            return result;
+        }
     }
 }

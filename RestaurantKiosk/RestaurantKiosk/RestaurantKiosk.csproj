@@ -80,10 +80,14 @@
     <Compile Include="Converter\FoodCategoryToKoreanConverter.cs" />
     <Compile Include="Converter\OrderInfoToStringConverter.cs" />
     <Compile Include="Model\Food.cs" />
+    <Compile Include="Model\Stat.cs" />
     <Compile Include="Model\TableInfo.cs" />
     <Compile Include="Model\Time.cs" />
     <Compile Include="ViewModel\FoodData.cs" />
     <Compile Include="ViewModel\FoodViewModel.cs" />
+    <Compile Include="ViewModel\Stats.cs">
+      <DependentUpon>FoodViewModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\TableInfoData.cs" />
     <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="ViewModel\TimeViewModel.cs" />
