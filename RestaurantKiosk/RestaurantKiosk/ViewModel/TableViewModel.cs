@@ -163,6 +163,22 @@ namespace RestaurantKiosk.ViewModel
             }
         }
 
+        public void ClearTable(TableInfo table)
+        {
+            var item = Items.FirstOrDefault(x => x.Idx == table.Idx);
+
+            if (item != null)
+            {
+                foreach (Food food in item.FoodList)
+                {
+                    food.Quantity = 0;
+                }
+
+                item.TotalPrice = 0;
+                item.OrderTime = new DateTime();
+            }
+        }
+
         public List<Food> Clone(TableInfo item)
         {
             List<Food> foods = new List<Food>();

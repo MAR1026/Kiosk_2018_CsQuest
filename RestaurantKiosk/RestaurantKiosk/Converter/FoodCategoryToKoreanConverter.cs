@@ -42,6 +42,10 @@ namespace RestaurantKiosk.Converter
                     result = "국 / 찌개류";
                     break;
 
+                case CategoryType.DRINK:
+                    result = "음료";
+                    break;
+
                 default:
                     break;
             }

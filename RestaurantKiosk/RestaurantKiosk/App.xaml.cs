@@ -17,5 +17,6 @@ namespace RestaurantKiosk
         public static FoodViewModel foodViewModel = new FoodViewModel();
         public static TableViewModel tableViewModel = new TableViewModel();
         public static TimeViewModel timeViewModel = new TimeViewModel();
+        public static StatViewModel statViewModel = new StatViewModel();
     }
 }

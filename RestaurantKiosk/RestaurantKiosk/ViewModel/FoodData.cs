@@ -16,6 +16,26 @@ namespace RestaurantKiosk.ViewModel
 
             foods.Add(new Food
             {
+                Category = CategoryType.DRINK,
+                Name = "코카콜라",
+                Quantity = 0,
+                Price = 1000,
+                Image = "/Assets/Image/DRINK/Coke.jpg",
+                Notice = "언제 어디서나 이 맛, 이 느낌! 코카콜라!"
+            });
+
+            foods.Add(new Food
+            {
+                Category = CategoryType.DRINK,
+                Name = "펩시",
+                Quantity = 0,
+                Price = 1000,
+                Image = "/Assets/Image/DRINK/Pepsi.jpg",
+                Notice = "젊은 열정 그대로! 펩시!"
+            });
+
+            foods.Add(new Food
+            {
                 Category = CategoryType.GIMBAP,
                 Name = "돈까스김밥",
                 Quantity = 0,

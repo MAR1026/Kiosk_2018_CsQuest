@@ -16,7 +16,6 @@ namespace RestaurantKiosk.ViewModel
         public FoodViewModel()
         {
             Items = new ObservableCollection<Food>();
-            Stats = new ObservableCollection<Stat>();
 #if false
             LoadDefaultData();
 #else

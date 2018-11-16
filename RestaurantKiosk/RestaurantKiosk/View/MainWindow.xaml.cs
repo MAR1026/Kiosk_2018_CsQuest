@@ -90,8 +90,9 @@ namespace RestaurantKiosk
 
             OrderCtrl.setCurrentTableInfo(item[0]);
 
-            TableCtrl.Visibility = Visibility.Collapsed;
             OrderCtrl.Visibility = Visibility.Visible;
+            TableCtrl.Visibility = Visibility.Collapsed;
+            StatCtrl.Visibility = Visibility.Collapsed;
         }
 
         private void OrderCtrl_OnBackToMain(object sender, EventArgs args)
@@ -100,6 +101,21 @@ namespace RestaurantKiosk
 
             TableCtrl.Visibility = Visibility.Visible;
             OrderCtrl.Visibility = Visibility.Collapsed;
+            StatCtrl.Visibility = Visibility.Collapsed;
+        }
+
+        private void Stat_Click(object sender, RoutedEventArgs e)
+        {
+            StatCtrl.Visibility = Visibility.Visible;
+            OrderCtrl.Visibility = Visibility.Collapsed;
+            TableCtrl.Visibility = Visibility.Collapsed;
+        }
+
+        private void StatCtrl_OnBackToMain(object sender, EventArgs args)
+        {
+            TableCtrl.Visibility = Visibility.Visible;
+            OrderCtrl.Visibility = Visibility.Collapsed;
+            StatCtrl.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -149,7 +149,8 @@ namespace RestaurantKiosk.Controls
                 selectedTable.FoodList = App.tableViewModel.Clone(currentTableInfo);
                 gdMenuImage.DataContext = null;
             }
-            
+
+            RefreshCategory(CategoryType.All);
             gdMenuImage.DataContext = null;
             OnBackToMain?.Invoke(sender, e);
         }
@@ -228,11 +229,47 @@ namespace RestaurantKiosk.Controls
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
+            RefreshCategory(CategoryType.All);
             gdMenuImage.DataContext = null;
             OnBackToMain?.Invoke(sender, e);
 
         }
+
+        private void btnPayment_Click(object sender, RoutedEventArgs e)
+        {
+            PaymentType paymentType = new PaymentType();
+
+            if (MessageBox.Show("카드 결제입니까? (아니요 시 현금결제)", "결제 방식 선택", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                paymentType = PaymentType.CREDIT_CARD;
+            }
+            else
+            {
+                paymentType = PaymentType.CASH;
+            }
+
+            string menu = FoodListToString(paymentType);
+
+            if (MessageBox.Show(menu, "결제 확인", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                App.statViewModel.AddStat(currentTableInfo, paymentType);
+                App.tableViewModel.ClearTable(currentTableInfo);
+
+                RefreshCategory(CategoryType.All);
+                gdMenuImage.DataContext = null;
+                OnBackToMain?.Invoke(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("결제가 취소되었습니다.", "결제 취소", MessageBoxButton.OK);
+            }
+        }
         #endregion
+
+        private void RefreshCategory(CategoryType categoryType)
+        {
+            lvFoodCategory.SelectedIndex = 0;
+        }
 
         #region listview selectionChanged
         private void lvFoodInfo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -273,29 +310,14 @@ namespace RestaurantKiosk.Controls
             {
                 currentCategorytype = e.AddedItems.Cast<CategoryType>().ToList()[0];
                 RefreshFoodCollectionView();
+                // RefreshCategory(e.AddedItems.Cast<CategoryType>().ToList()[0]);
             }
         }
 
         #endregion
 
-        private void btnPayment_Click(object sender, RoutedEventArgs e)
-        {
-            PaymentType paymentType = new PaymentType();
 
-            if(MessageBox.Show("카드 결제입니까? (아니요 시 현금결제)", "결제 방식 선택", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                paymentType = PaymentType.CREDIT_CARD;
-                //App.foodViewModel.AddStat(currentTableInfo, PaymentType.CREDIT_CARD);
-            }
-            else
-            {
-                paymentType = PaymentType.CASH;
-            }
-
-            //MessageBox.Show(result, "dd", MessageBoxButton.OKCancel);
-        }
-
-        private string FoodListToString()
+        private string FoodListToString(PaymentType paymentType)
         {
             string result = string.Empty;
 
@@ -309,6 +331,17 @@ namespace RestaurantKiosk.Controls
                 {
                     continue;
                 }
+            }
+
+            switch (paymentType)
+            {
+                case PaymentType.CREDIT_CARD:
+                    result += "\n총 금액: " + currentTableInfo.TotalPrice + "원\n결제방식 : 신용카드";
+                    break;
+
+                case PaymentType.CASH:
+                    result += "\n총 금액: " + currentTableInfo.TotalPrice + "원\n결제방식 : 현금";
+                    break;
             }
 
             return result;

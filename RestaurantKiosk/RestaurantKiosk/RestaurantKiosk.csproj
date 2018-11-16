@@ -59,6 +59,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\StatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\TableControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -74,6 +78,9 @@
     <Compile Include="Controls\OrderControl.xaml.cs">
       <DependentUpon>OrderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\StatControl.xaml.cs">
+      <DependentUpon>StatControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TableControl.xaml.cs">
       <DependentUpon>TableControl.xaml</DependentUpon>
     </Compile>
@@ -81,14 +88,22 @@
     <Compile Include="Converter\OrderInfoToStringConverter.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\Stat.cs" />
+    <Compile Include="Model\Stat_Category.cs">
+      <DependentUpon>Stat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Stat_Payment.cs">
+      <DependentUpon>Stat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\TableInfo.cs" />
     <Compile Include="Model\Time.cs" />
-    <Compile Include="ViewModel\FoodData.cs" />
-    <Compile Include="ViewModel\FoodViewModel.cs" />
-    <Compile Include="ViewModel\Stats.cs">
+    <Compile Include="ViewModel\FoodData.cs">
       <DependentUpon>FoodViewModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\TableInfoData.cs" />
+    <Compile Include="ViewModel\FoodViewModel.cs" />
+    <Compile Include="ViewModel\StatViewModel.cs" />
+    <Compile Include="ViewModel\TableInfoData.cs">
+      <DependentUpon>TableViewModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="ViewModel\TimeViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
@@ -168,6 +183,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Image\Snack\CheesePorkCutlet.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Image\DRINK\Coke.jpg" />
+    <Resource Include="Assets\Image\DRINK\Pepsi.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

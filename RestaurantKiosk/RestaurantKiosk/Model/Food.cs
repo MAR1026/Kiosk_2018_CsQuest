@@ -15,7 +15,8 @@ namespace RestaurantKiosk.Model
         NOODLE = 2,
         RICE = 3,
         STEW = 4,
-        SNACK = 5
+        SNACK = 5,
+        DRINK = 6
     }
     public class Food : INotifyPropertyChanged
     {
@@ -106,6 +107,20 @@ namespace RestaurantKiosk.Model
             {
                 notice = value;
                 NotifyPropertyChanged(nameof(Notice));
+            }
+        }
+
+        private string barcode;
+        public string Barcode
+        {
+            get
+            {
+                return barcode;
+            }
+            set
+            {
+                barcode = value;
+                NotifyPropertyChanged(nameof(barcode));
             }
         }
 
