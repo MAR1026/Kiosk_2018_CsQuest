@@ -25,7 +25,7 @@
                                FontSize="16" FontFamily="NanumSquareRound Bold"/>
                 </Grid>
                 <Grid Grid.Row="1" Margin="0, 1, 0, 0">
-                    <TextBlock x:Name="tbMenuName" Margin="10, 0, 0, 0"
+                    <TextBlock x:Name="tbMenuName" Margin="10, 10, 0, 0"
                                Text="{Binding FoodList, Converter={StaticResource OrderInfoToStringConverter}}"
                                FontSize="20" FontFamily="NanumSquareRound Bold" 
                                Foreground="Black"/>

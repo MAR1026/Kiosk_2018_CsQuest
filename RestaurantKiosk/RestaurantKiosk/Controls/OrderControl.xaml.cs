@@ -350,7 +350,15 @@ namespace RestaurantKiosk.Controls
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            Window.GetWindow(this).PreviewTextInput += OrderControl_PreviewTextInput; 
+            try
+            {
+                var window = Window.GetWindow(this);
+                window.PreviewTextInput += OrderControl_PreviewTextInput;
+
+            } catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         private void OrderControl_PreviewTextInput(object sender, TextCompositionEventArgs e)

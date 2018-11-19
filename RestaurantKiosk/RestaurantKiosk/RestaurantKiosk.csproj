@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -127,7 +128,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -188,6 +189,58 @@
   <ItemGroup>
     <Resource Include="Assets\Image\DRINK\Coke.jpg" />
     <Resource Include="Assets\Image\DRINK\Pepsi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Coke.jpg" />
+    <Resource Include="Resources\Pepsi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CheesePorkCutlet.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BulgogiGIMBAP.jpg" />
+    <Resource Include="Resources\CheeseGIMBAP.jpg" />
+    <Resource Include="Resources\FiredShrimpGIMBAP.jpg" />
+    <Resource Include="Resources\GrilledPattyGIMBAP.jpg" />
+    <Resource Include="Resources\KingSausageGIMBAP.jpg" />
+    <Resource Include="Resources\PorkCutletGIMBAP.jpg" />
+    <Resource Include="Resources\TunaGIMBAP.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ColdNoodle.jpg" />
+    <Resource Include="Resources\FiredTofuUdon.jpg" />
+    <Resource Include="Resources\Soba.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ChickenBreastRice.jpg" />
+    <Resource Include="Resources\FriedBeefRice.jpg" />
+    <Resource Include="Resources\FriedOctopusRice.jpg" />
+    <Resource Include="Resources\katsudon.jpg" />
+    <Resource Include="Resources\KimchiFriedRice.jpg" />
+    <Resource Include="Resources\OmeletRice.jpg" />
+    <Resource Include="Resources\PorkCutletKimchiFriedRice.jpg" />
+    <Resource Include="Resources\SpicyPorkRice.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BigDumpling.jpg" />
+    <Resource Include="Resources\CheeseRabboki.jpg" />
+    <Resource Include="Resources\Rabboki.jpg" />
+    <Resource Include="Resources\RipDumpling.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BeanPasteStew.jpg" />
+    <Resource Include="Resources\HotPotBulgogi.jpg" />
+    <Resource Include="Resources\KimchiStew.jpg" />
+    <Resource Include="Resources\SausageStew.jpg" />
+    <Resource Include="Resources\SoftTofuStew.jpg" />
+    <Resource Include="Resources\SpicyBeefStew.jpg" />
+    <Resource Include="Resources\TteokDumplingStew.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Image\GIMBAP\LoadingImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LoadingImage.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
