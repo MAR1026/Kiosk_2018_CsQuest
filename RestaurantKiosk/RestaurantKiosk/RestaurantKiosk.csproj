@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Converter\FoodCategoryToKoreanConverter.cs" />
     <Compile Include="Converter\OrderInfoToStringConverter.cs" />
+    <Compile Include="Converter\PaymentToStringConverter.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\Stat.cs" />
     <Compile Include="Model\Stat_Category.cs">

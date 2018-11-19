@@ -29,6 +29,7 @@ namespace RestaurantKiosk.Controls
         private TableInfo currentTableInfo = new TableInfo();
         private CategoryType currentCategorytype = new CategoryType();
 
+        private string barcode = string.Empty;
         private bool foodCollectionViewFlag = false;
         // public ICollectionViewLiveShaping CategoryLiveShaping { get; set; }
 
@@ -37,7 +38,6 @@ namespace RestaurantKiosk.Controls
         public OrderControl()
         {
             InitializeComponent();
-
             InitMenuCollectionView();
         }
 
@@ -286,10 +286,11 @@ namespace RestaurantKiosk.Controls
                 }
                 else
                 {
-                    gdMenuImage.DataContext = selectedItem[0];
-                    App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
-                    App.tableViewModel.IncreaseTotalPrice(currentTableInfo, selectedItem[0]);
-                    RefreshOrderCollectionView();
+                    AddSelectedFood(selectedItem[0]);
+                    //gdMenuImage.DataContext = selectedItem[0];
+                    //App.tableViewModel.IncreaseQuantity(currentTableInfo, selectedItem[0]);
+                    //App.tableViewModel.IncreaseTotalPrice(currentTableInfo, selectedItem[0]);
+                    //RefreshOrderCollectionView();
                 }
 
                 lvFoodInfo.SelectedIndex = -1;
@@ -345,6 +346,44 @@ namespace RestaurantKiosk.Controls
             }
 
             return result;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window.GetWindow(this).PreviewTextInput += OrderControl_PreviewTextInput; 
+        }
+
+        private void OrderControl_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (this.Visibility == Visibility.Visible)
+            {
+                if (e.Text[0] >= '0' && e.Text[0] <= '9')
+                {
+                    barcode += e.Text[0];
+                }
+                if (e.Text[0] == '\r')
+                {
+                    Food selectedFoodByBarcode = App.foodViewModel.GetSelectedFoodByBarcode(barcode);
+                    if(selectedFoodByBarcode != null)
+                    {
+                        AddSelectedFood(selectedFoodByBarcode);
+                    }
+                    else
+                    {
+                        MessageBox.Show("등록되지 않은 상품입니다.", "오류", MessageBoxButton.OK);
+                    }
+
+                    barcode = string.Empty;
+                }
+            }
+        }
+
+        private void AddSelectedFood(Food food)
+        {
+            gdMenuImage.DataContext = food;
+            App.tableViewModel.IncreaseQuantity(currentTableInfo, food);
+            App.tableViewModel.IncreaseTotalPrice(currentTableInfo, food);
+            RefreshOrderCollectionView();
         }
     }
 }

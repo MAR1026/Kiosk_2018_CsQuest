@@ -5,23 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RestaurantKiosk.Controls"
              xmlns:model="clr-namespace:RestaurantKiosk.Model"
+             xmlns:converter="clr-namespace:RestaurantKiosk.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <converter:FoodCategoryToKoreanConverter x:Key="FoodCategoryToKoreanConverter"/>
+        <converter:PaymentToStringConverter x:Key="PaymentToStringConverter"/>
+
         <Style x:Key="tbStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="FontFamily" Value="NanumSquareRound Bold"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
         
-        <DataTemplate x:Key="OrderListDataTemplate" DataType="{x:Type model:Stat}">
+        <DataTemplate x:Key="MenuDataTemplate" DataType="{x:Type model:Stat}">
             <Grid Margin="5" VerticalAlignment="Center">
                 <Grid FocusVisualStyle="{x:Null}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="0.2*"/>
-                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.3*"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
@@ -39,10 +42,52 @@
                         <TextBlock Text="{Binding TotalPrice, StringFormat={}{0}원}" Style="{StaticResource tbStyle}"
                                    HorizontalAlignment="Center"/>
                     </Grid>
-                    <Grid Grid.Column="3">
-                        <TextBlock Text="{Binding PaymentType}" Style="{StaticResource tbStyle}"
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="CategoryDataTemplate" DataType="{x:Type model:Stat_Category}">
+            <Grid Margin="5" VerticalAlignment="Center">
+                <Grid FocusVisualStyle="{x:Null}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <TextBlock Text="{Binding Category, Converter={StaticResource FoodCategoryToKoreanConverter}}" Style="{StaticResource tbStyle}"
+                                   Margin="10, 0, 0, 0" TextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <TextBlock Text="{Binding Quantity}" Style="{StaticResource tbStyle}"
                                    HorizontalAlignment="Center"
                                    Margin="0, 0, 15, 0"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock Text="{Binding TotalPrice, StringFormat={}{0}원}" Style="{StaticResource tbStyle}"
+                                   HorizontalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="PaymentDataTemplate" DataType="{x:Type model:Stat_Payment}">
+            <Grid Margin="5" VerticalAlignment="Center">
+                <Grid FocusVisualStyle="{x:Null}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <TextBlock Text="{Binding PaymentType, Converter={StaticResource PaymentToStringConverter}}" Style="{StaticResource tbStyle}"
+                                   Margin="10, 0, 0, 0" TextAlignment="Center"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBlock Text="{Binding TotalPrice, StringFormat={}{0}원}" Style="{StaticResource tbStyle}"
+                                   HorizontalAlignment="Center"/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -103,8 +148,33 @@
         </Grid>
 
         <Grid x:Name="gdCategoryStat" Grid.Row="1" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="카테고리명" Grid.Column="0"
+                                   Style="{StaticResource tbStyle}" Foreground="White"
+                                   TextAlignment="Center" Margin="30, 0, 0, 0"
+                                   VerticalAlignment="Center"/>
+                <TextBlock Text="총 주문 수량" Grid.Column="1"
+                                   Style="{StaticResource tbStyle}" Foreground="White"
+                                   TextAlignment="Center" Margin="15, 0, 15, 0"
+                                   VerticalAlignment="Center"/>
+                <TextBlock Text="총 판매 가격" Grid.Column="2"
+                                   Style="{StaticResource tbStyle}" Foreground="White"
+                                   TextAlignment="Center" Margin="35, 0, 40, 0"
+                                   VerticalAlignment="Center"/>
+            </Grid>
+                
             <ListView x:Name="lvCategory" Grid.Row="1"
-                      SelectionMode="Single" ItemTemplate="{StaticResource OrderListDataTemplate}"
+                      SelectionMode="Single" ItemTemplate="{StaticResource CategoryDataTemplate}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Background="White" BorderThickness="0">
                 <ListView.ItemContainerStyle>
@@ -123,10 +193,9 @@
 
             <Grid Grid.Row="0" Background="Black">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="메뉴명" Grid.Column="0"
@@ -141,14 +210,10 @@
                                    Style="{StaticResource tbStyle}" Foreground="White"
                                    TextAlignment="Center" Margin="35, 0, 40, 0"
                                    VerticalAlignment="Center"/>
-                <TextBlock Text="결제 방법" Grid.Column="3"
-                                   Style="{StaticResource tbStyle}" Foreground="White"
-                                   TextAlignment="Center" Margin="10, 0, 40, 0"
-                                   VerticalAlignment="Center"/>
             </Grid>
 
             <ListView x:Name="lvMenu" Grid.Row="1"
-                      SelectionMode="Single" ItemTemplate="{StaticResource OrderListDataTemplate}"
+                      SelectionMode="Single" ItemTemplate="{StaticResource MenuDataTemplate}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Background="White" BorderThickness="0">
                 <ListView.ItemContainerStyle>
@@ -160,8 +225,27 @@
         </Grid>
 
         <Grid x:Name="gdPaymentStat" Grid.Row="1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="0.9*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="Black">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="결제 방식" Grid.Column="0"
+                                   Style="{StaticResource tbStyle}" Foreground="White"
+                                   TextAlignment="Center" Margin="30, 0, 0, 0"
+                                   VerticalAlignment="Center"/>
+                <TextBlock Text="총 판매 가격" Grid.Column="2"
+                                   Style="{StaticResource tbStyle}" Foreground="White"
+                                   TextAlignment="Center" Margin="35, 0, 40, 0"
+                                   VerticalAlignment="Center"/>
+            </Grid>
             <ListView x:Name="lvPayment" Grid.Row="1"
-                      SelectionMode="Single" ItemTemplate="{StaticResource OrderListDataTemplate}"
+                      SelectionMode="Single" ItemTemplate="{StaticResource PaymentDataTemplate}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       Background="White" BorderThickness="0">
                 <ListView.ItemContainerStyle>

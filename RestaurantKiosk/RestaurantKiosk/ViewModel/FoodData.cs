@@ -21,7 +21,8 @@ namespace RestaurantKiosk.ViewModel
                 Quantity = 0,
                 Price = 1000,
                 Image = "/Assets/Image/DRINK/Coke.jpg",
-                Notice = "언제 어디서나 이 맛, 이 느낌! 코카콜라!"
+                Notice = "언제 어디서나 이 맛, 이 느낌! 코카콜라!",
+                Barcode = "8801094017200"
             });
 
             foods.Add(new Food
@@ -31,7 +32,8 @@ namespace RestaurantKiosk.ViewModel
                 Quantity = 0,
                 Price = 1000,
                 Image = "/Assets/Image/DRINK/Pepsi.jpg",
-                Notice = "젊은 열정 그대로! 펩시!"
+                Notice = "젊은 열정 그대로! 펩시!",
+                Barcode = "8801056070809"
             });
 
             foods.Add(new Food

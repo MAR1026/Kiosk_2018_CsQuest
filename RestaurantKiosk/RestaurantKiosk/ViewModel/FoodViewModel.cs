@@ -40,5 +40,22 @@ namespace RestaurantKiosk.ViewModel
         {
             Items.Add(food);
         }
+
+
+
+        public Food GetSelectedFoodByBarcode(string barcode)
+        {
+            Food food = Items.FirstOrDefault(x => x.Barcode == barcode);
+
+            if(food != null)
+            {
+                return food;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }
